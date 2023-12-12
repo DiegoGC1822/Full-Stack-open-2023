@@ -40,8 +40,8 @@ const Statistics = ({good,neutral,bad}) => {
           <StatisticLine text ="neutral" value={neutral}></StatisticLine>
           <StatisticLine text ="bad" value={bad}></StatisticLine>
           <StatisticLine text ="all" value={good + neutral + bad}></StatisticLine> 
-          <StatisticLine text ="average" value={(good*1 + neutral*0 + bad*-1)/9}></StatisticLine> 
-          <StatisticLine text ="positive" value={good*100/9}></StatisticLine> 
+          <StatisticLine text ="average" value={(good*1 + neutral*0 + bad*-1)/(good + neutral + bad)}></StatisticLine> 
+          <StatisticLine text ="positive" value={`${(good * 100) / (good + neutral + bad)}%` }></StatisticLine> 
         </tbody>
       </table>
     </>
