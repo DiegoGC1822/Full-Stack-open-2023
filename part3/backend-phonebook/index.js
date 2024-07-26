@@ -19,7 +19,7 @@ app.get('/api/persons', (request, response) => {
 })
 
 app.get('/info', (request, response) => {
-  const date = new Date();
+  const date = new Date()
   const persons = Person.find({})
   response.send(`
     <p>Phonebook has info for ${persons.length} people</p>
@@ -29,14 +29,14 @@ app.get('/info', (request, response) => {
 
 app.get('/api/persons/:id', (request, response, next) => {
   Person.findById(request.params.id)
-  .then(person => {
-    if (person) {
-      response.json(person)
-    } else {
-      response.status(404).end()
-    }
-  })
-  .catch(error => next(error))
+    .then(person => {
+      if (person) {
+        response.json(person)
+      } else {
+        response.status(404).end()
+      }
+    })
+    .catch(error => next(error))
 })
 
 app.delete('/api/persons/:id', (request, response, next) => {
@@ -52,15 +52,11 @@ app.post('/api/persons', (request, response, next) => {
   const body = request.body
 
   if (!body.name) {
-    return response.status(400).json({ 
-      error: 'name is missing' 
-    })
+    return response.status(400).json({ error: 'name is missing' })
   }
 
   if (!body.number) {
-    return response.status(400).json({ 
-      error: 'number is missing' 
-    })
+    return response.status(400).json({ error: 'number is missing' })
   }
 
   const person = new Person({
@@ -74,12 +70,10 @@ app.post('/api/persons', (request, response, next) => {
 })
 
 app.put('/api/persons/:id', (request, response, next) => {
-  const {name, number} = request.body
+  const { name, number } = request.body
 
   Person.findByIdAndUpdate(request.params.id, { name, number }, { new: true, runValidators: true, context: 'query' })
-    .then(updatedPerson => {
-      response.json(updatedPerson)
-    })
+    .then(updatedPerson => response.json(updatedPerson))
     .catch(error => next(error))
 })
 
