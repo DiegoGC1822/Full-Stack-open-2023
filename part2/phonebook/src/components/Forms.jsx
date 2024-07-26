@@ -34,6 +34,22 @@ const Forms = ({setPersons,persons,setMessage}) => {
               setMessage(null)
             }, 5000)
           })
+          .catch(error => {
+            const message = {
+              content: error.response.data.error,
+              color: 'red',
+              background: 'lightgrey',
+              fontSize: 20,
+              borderStyle: 'solid',
+              borderRadius: 5,
+              padding: 10,
+              marginBottom: 10,
+            }
+            setMessage(message)
+            setTimeout(() => {
+              setMessage(null)
+            }, 5000)
+          })
       }
       setNewName('')
       setNewNumber('')
@@ -49,7 +65,7 @@ const Forms = ({setPersons,persons,setMessage}) => {
         })
         .catch((error) => {
           const message = {
-            content: `Information of ${person.name} has already been removed from server`,
+            content: error.response.data.error,
             color: 'red',
             background: 'lightgrey',
             fontSize: 20,

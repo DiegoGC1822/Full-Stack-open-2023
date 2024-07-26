@@ -16,6 +16,22 @@ const App = () => {
       .then(initialPersons => {
         setPersons(initialPersons)
       })
+      .catch(error => {
+        const message = {
+          content: error.response.data.error,
+          color: 'red',
+          background: 'lightgrey',
+          fontSize: 20,
+          borderStyle: 'solid',
+          borderRadius: 5,
+          padding: 10,
+          marginBottom: 10,
+        }
+        setMessage(message)
+        setTimeout(() => {
+          setMessage(null)
+        }, 5000)
+      })
   }, [])
 
   return (
